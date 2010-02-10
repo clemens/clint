@@ -1,0 +1,11 @@
+Better DSL for multiple triggers per table/model? Like so:
+
+triggers_for 'Product' do
+  after :update <<-sql
+    UPDATE categories SET updated_at = NOW() WHERE id IN (OLD.category_id, NEW.category_id)
+  sql
+
+  before [:insert, :update] <<-sql
+    SET NEW.updated_at = NOW();
+  sql
+end

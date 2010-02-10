@@ -43,9 +43,7 @@ class Clint
         CREATE TRIGGER #{name}
         #{action_name} ON #{table_name}
         FOR EACH ROW
-        BEGIN
-          #{implementation}
-        END
+        #{implementation}
       sql
     end
 
