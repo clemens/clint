@@ -11,6 +11,12 @@ class ClintTest < Test::Unit::TestCase
     assert_equal number_of_triggers + 2, Clint.triggers.size
   end
 
+  test ".trigger replaces an existing trigger in the database" do
+    number_of_triggers = Clint.triggers.size
+    Clint.trigger(:model => 'Cart', :before => :update, :replace => true, :implementation => 'SET NEW.updated_at = NOW();')
+    assert_equal number_of_triggers, Clint.triggers.size
+  end
+
   test ".triggers lists all currently installed triggers" do
     triggers = Clint.triggers
 

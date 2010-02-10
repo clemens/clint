@@ -88,7 +88,7 @@ class Clint
 
     def trigger(options = {})
       triggers = build_triggers(options)
-      triggers.each { |trigger| trigger.install }
+      triggers.each { |trigger| options[:replace] ? trigger.replace : trigger.install }
     end
 
     def triggers
